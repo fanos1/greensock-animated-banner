@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Untitled Document</title>
+    <style type="text/css">
+    
+        #parent {
+            position:relative;
+            width:300px;
+            height:250px;
+			background-image: url("img/bg.jpg");
+            background-color:#FC0;	
+			
+			overflow:hidden;
+        }
+        .flash1 {		
+            width:300px;
+            height:250px;
+			position:absolute;
+			
+			top:0;
+			left:0;
+			
+            background-color:#fff;			
+            opacity: 0;
+			z-index:10;
+        }
+    
+        #first1 {
+            position: absolute;	
+			top:66px;
+        }
+		#first2  {
+			position: absolute;	
+			top:122px;
+			
+        }
+		#first3 {
+			position: absolute;	
+			top:126px;		
+			left:28px;
+		}
+		.button {
+			position: absolute;	
+			top:176px;		
+			left:28px;
+		}
+		
+		
+		/* ------- ikinci bolum --------- */
+		#second1 {
+            position: absolute;	
+			top:66px;
+        }
+		#second2  {
+			position: absolute;	
+			top:122px;
+        }
+		#second3 {
+			position: absolute;	
+			top:126px;		
+			left:26px;
+		}
+		
+		
+		#logo {
+			position: absolute;	
+			top:14px;	
+		}
+		
+    </style>
+
+</head>
+
+
+<body>
+
+	<div id="parent">    
+
+			<div id="logo">
+            	<img src="img/logo.png" title="logo" />
+            </div>
+
+			<!-- birinci -->
+            <div id="first1">
+            	<img src="img/1.png" title="" />                
+            </div>
+            <div id="first2"> 
+            	<img src="img/2.png" title="" />  
+            </div>
+            <p id="first3">
+            	<img src="img/3.png" title="" />
+			</p>
+            <div class="button">
+            	<img src="img/button.png" title="" />
+            </div>
+            <div class="flash1"></div>
+
+
+			<!-- ikinci  -->
+            <div id="second1">
+            	<img src="img/4.png" title="" />                
+            </div>
+            <div id="second2"> 
+            	<img src="img/5.png" title="" />  
+            </div>
+            <p id="second3">
+            	<img src="img/6.png" title="" />
+			</p>
+            <div class="flash1"></div>
+           
+            
+          
+                
+        
+    </div>
+
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- 
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>     
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.0/plugins/TextPlugin.min.js'></script>    
+    <script src='http://www.greensock.com/_js/jquery/jquery.ui.touch-punch.js'></script> 
+    -->     
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
+    
+
+	<script type="text/javascript">
+	
+    	var $parent = $("#parent");
+		
+		var $first1 = $("#first1");
+		var $first2 = $("#first2");
+		var $first3 = $("#first3");
+				
+		var $second1 = $("#second1");
+		var $second2 = $("#second2");
+		var $second3 = $("#second3");
+
+		var $logo = $("#logo");
+		var $flash1 = $(".flash1");
+	
+		
+		function birinciBolum() {			
+			//var tl = new TimelineLite();
+			var tl = new TimelineMax(); //imelineMax extends TimelineLite, offering exactly the same functionality plus useful (but non-essential) features like repeat, repeatDelay, yoyo, currentLabel(), tweenTo(), tweenFromTo(), getLabelAfter(), getLabelBefore(), getActive()
+			
+			tl.fromTo( $logo, 1, {x: '-=300px'}, {x: 114, ease:Power4.easeInOut} )
+			tl.fromTo( $first1, 1, {x: '-=300px'}, {x: 16, ease:Power4.easeInOut} )			
+			tl.fromTo( $first2, 1, {x: '+=300px'}, {x: 26, ease:Power4.easeIn}, "-=1" )			
+			//tl.from($herCumartesi, 0.4, {scale:0.2, autoAlpha:0, ease:Back.easeOut})
+			//tl.from($herCumartesi, 1, {autoAlpha:0, ease:Back.easeOut} )			
+			tl.from( $first3, 0.5, {opacity:0, scale:0, ease:Bounce.easeOut} ) 
+			tl.from( ".button", 0.5, {opacity:0, scale:0, ease:Bounce.easeOut} ) 
+			
+			
+			tl.to($first1, 0.4, { scaleX:1.10, scaleY:1.10, yoyo:true, repeat:3}, "+=3" )
+			tl.to($flash1, 0.1, { autoAlpha:1, yoyo:true, repeat:3} )	//will tween the alpha (opacity) of a object, and when the tween finish, it will set the  visibility to “hidden”		
+			
+			tl.to($first1, 0.4, {x:-200, ease:Bounce.easeOut} )
+			tl.to($first2, 0.4, {x:400, ease:Back.easeInOut}, "-=0.3" )			
+			tl.to($first3, 0.3, {opacity:0} )	//will tween the alpha (opacity) of a object, and when the tween finish, it will set the  visibility to “hidden”		
+				
+			
+			//tl.to($herCumartesi, 0.4, {opacity:0, ease:Back.easeOut} )			
+			return tl; 		  
+		}
+		
+		
+		
+		function ikinciBolum() {
+			var tl = new TimelineMax(); 
+			 		
+			//tl.fromTo( $logo, 1, {x: '-=300px'}, {x: 114, ease:Power4.easeInOut} )
+			tl.fromTo( $second1, 1, {x: '-=300px'}, {x: 10, ease:Power4.easeInOut} )			
+			tl.fromTo( $second2, 1, {x: '+=300px'}, {x: 26, ease:Power4.easeIn}, "-=1" )
+			
+			tl.from( $second3, 0.5, {opacity:0, scale:0, ease:Bounce.easeOut} ) ;
+						
+			tl.to($second1, 0.4, { scaleX:1.10, scaleY:1.10, yoyo:true, repeat:3}, "+=3" )
+			tl.to($flash1, 0.1, { autoAlpha:1, yoyo:true, repeat:3} )	//will tween the alpha (opacity) of a object, and when the tween finish, it will set the  visibility to “hidden”		
+			
+			tl.to($second1, 0.4, {x:-200, ease:Bounce.easeOut} )
+			tl.to($second2, 0.4, {x:400, ease:Back.easeInOut}, "-=0.3" ) 
+			
+			
+			//tl.staggerFrom( ".logo", 0.5, { opacity:0, y:200}, 0.2 )
+			
+			return tl; 				
+		} 
+		
+		
+		function createMasterTimeline() {		  
+		  //timeline = new TimelineLite({onUpdate:updateSlider, onComplete:showSlider, onCompleteParams:['{self}'] } );		  
+		  timeline = new TimelineLite({onComplete:myRestart, onCompleteParams:['{self}'] } );		  
+		  timeline
+		  	//.set($banner, {autoAlpha:1})
+			// add the first animation at a time of 0.3 seconds
+			.add( birinciBolum(), 0.1 ) //add the first animation at a time of 0.1 seconds
+			.add( ikinciBolum(), 8 );
+			
+		  	//timeline.timeScale(1); //put a 4 in there, I dare you ;)
+			
+		}  
+		
+		
+		//this function is called by timeline's onUpdate callback
+		function updateSlider() {
+		  $slider.slider("value", timeline.progress() *100);
+		} 	 	
+		function myRestart(tl) {
+		  //TweenLite.to($slider, 0.5, {autoAlpha:1});
+		  //createMasterTimeline(); //call
+		  tl.restart();
+		}  
+
+
+		
+		createMasterTimeline(); //call
+		
+		
+		
+    </script>
+	
+    
+    
+</body>
+</html>
